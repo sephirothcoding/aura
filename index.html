@@ -131,11 +131,6 @@
                 <p>Price: 400 xats</p>
             </div>
 
-
-
-
-
-
         </div>
 
         <div class="right-section">
@@ -152,12 +147,7 @@
                 <h3>outer 2</h3>
                 <p>Price: 600 xats</p>
             </div>
-
-
-
-
         </div>
-
     </div>
 
     <div id="myModal" class="modal">
@@ -179,9 +169,7 @@
         function closeModal() {
             modal.style.display = "none";
         }
-    </script>
 
-    <script>
         var RENDERER = {
             init: function () {
                 this.setParameters();
@@ -189,10 +177,10 @@
                 this.render();
             },
             setParameters: function () {
-                this.$container = $('#jsi-butterfly-container');
-                this.width = this.$container.width();
-                this.height = this.$container.height();
-                this.context = $('<canvas />').attr({ width: this.width, height: this.height }).appendTo(this.$container).get(0).getContext('2d');
+                this.$container = document.getElementById('jsi-butterfly-container');
+                this.width = this.$container.offsetWidth;
+                this.height = this.$container.offsetHeight;
+                this.context = this.$container.getContext('2d');
                 this.butterflies = [new BUTTERFLY(this)];
                 this.particles = [];
                 this.count = this.getRandomValue(100, 300);
@@ -230,10 +218,12 @@
                 }
             }
         };
+
         var BUTTERFLY = function (renderer) {
             this.renderer = renderer;
             this.init();
         };
+
         BUTTERFLY.prototype = {
             DELTA_THETA: Math.PI / 50,
             DELTA_PHI: Math.PI / 100,
@@ -334,12 +324,14 @@
                 return this.createParticles();
             }
         };
+
         var PARTICLE = function (renderer, x, y) {
             this.renderer = renderer;
             this.x = x;
             this.y = y;
             this.init();
         };
+
         PARTICLE.prototype = {
             FRICTION: 0.99,
             RADIUS: 2,
@@ -369,9 +361,8 @@
                 return this.opacity > 0;
             }
         };
-        $(function () {
-            RENDERER.init();
-        });
+
+        RENDERER.init();
     </script>
 </body>
 
